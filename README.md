@@ -17,6 +17,8 @@ To get going you need to do the following:
 5. Clone the `tbvax` repository
 6. Enter the cloned repository and run `R` to get the `R` package environment set up.
 
+Once you have completed item 1, log into Cirrus using _both_ your SSH key _and_ password at `login.cirrus.ac.uk`.
+
 ## 2 Cirrus instructions
 
 The files in this repository (`.bashrc` and `.bash_profile`) are startup files. When you log into Cirrus for the _first time after installing them_, they will:
@@ -64,7 +66,7 @@ ssh-keygen
 * Mostly just press 'enter'. I would use the default name for the SSH key.
 * Leave the passphrase blank.
 
-#### GitHub CLI
+#### 2.2.1 GitHub CLI
 
 The [GitHub CLI][ghcli] makes it a bit easier to authenticate with GitHub, rather than manually creating SSH key pairs and copying things over.
 
@@ -74,7 +76,18 @@ I have created a screencast of using the GitHub CLI. Please watch:
 
 [![asciicast](https://asciinema.org/a/eyYUm2w7VNEbEirGETIUmN4eP.svg)](https://asciinema.org/a/eyYUm2w7VNEbEirGETIUmN4eP)
 
+## Getting started with `tbvax`
 
+First, clone the `tbvax` repository and checkout the **Intro** branch. Note we're not back to using SSH (`git@github.com:`):
+
+```bash
+cd '$HOME'
+git clone git@github.com:lshtm-tbmg/tbvax.git
+cd tbvax
+git checkout Intro
+```
+
+Open R. `renv will bootstrap`. Then run `renv::restore()` to install the R package environment.
 
 
 
