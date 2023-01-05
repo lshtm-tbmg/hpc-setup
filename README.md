@@ -76,7 +76,7 @@ I have created a screencast of using the GitHub CLI. Please watch:
 
 [![asciicast](https://asciinema.org/a/eyYUm2w7VNEbEirGETIUmN4eP.svg)](https://asciinema.org/a/eyYUm2w7VNEbEirGETIUmN4eP)
 
-## Getting started with `tbvax`
+## 3 Getting started with `tbvax`
 
 First, clone the `tbvax` repository and checkout the **Intro** branch. Note we're not back to using SSH (`git@github.com:`):
 
@@ -87,9 +87,13 @@ cd tbvax
 git checkout Intro
 ```
 
-Open R. `renv will bootstrap`. Then run `renv::restore()` to install the R package environment.
+Open R. `renv` will bootstrap. Then run `renv::restore()` to install the R package environment.
 
+## 4 Other notes
+
+* Although the `R` and `cmake` modules load automatically when you log in, I would recommend putting the relevant `module load` commands at the top of any cluster job submission scripts.
 
 
 [^cmake]: I think `arrow` requires `cmake v3.22` to compile.
+
 [ghcli]: cli.github.com
