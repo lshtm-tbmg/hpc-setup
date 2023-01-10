@@ -9,7 +9,7 @@ The documentation for this cluster is good. If you get stuck, please read it: <h
 In addition, there are a few other documents you may find useful:
 
 * [Common shell commands and what they mean](common-shell-commands.md)
-* An example cluster job and what the cluster job submission script headers mean
+* [Running a cluster job and what the cluster job submission script headers mean](running-a-cluster-job.md)
 
 ## 1 Overview
 
