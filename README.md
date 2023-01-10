@@ -41,8 +41,8 @@ rm $HOME/.bashrc
 rm $HOME/.bash_profile
 git clone https://github.com/lshtm-tbmg/hpc-setup.git
 cd 'hpc-setup'
-ln -s .bashrc $HOME/.bashrc
-ln -s .bash_profile $HOME/.bash_profile
+cp .bashrc $HOME/.bashrc
+cp .bash_profile $HOME/.bash_profile
 ```
 
 **Now log out of and back into Cirrus**. You should see some startup as it installs `micro` and the GitHub CLI.
