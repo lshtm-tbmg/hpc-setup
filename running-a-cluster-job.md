@@ -13,11 +13,11 @@ I have split this up into two sections:
 
 * I suggest that you make a _new folder_ for each separate cluster job (unit of work) that you do.
 * I suggest you use the same name for this folder as the cluster _job name_ (see later).
-* You should make this in your `**/work/ec232/ec232/YourUserName**` folder.
+* You should make this in your **`/work/ec232/ec232/YourUserName`** folder.
 * Clone the `tbvax` GitHub repository _into_ that new folder. Your folder layout might look like this:
 
 ```
-YourHome/
+/work/ec232/ec232/YourUserName
 └── FolderForClusterJob/                <-- Make this for each cluster job
     └── tbvax/                          <-- clone the tbvax repository
             ├── cluster_scripts/
@@ -66,7 +66,7 @@ sbatch tbvax/cluster_scripts/demoscript.sh # Submit the job
 
 You can then check the status of the job using `squeue --user=$USER` or the equivalent custom shortcut `usqueue`.
 
-### 1.3 Example job
+### 1.4 Example job
 
 Here is the summary of commands to run the example job which we will call 'lshtm-test-job'.
 
