@@ -1,13 +1,18 @@
 [<== Back to main README](README.md)
 
-# Running an example cluster job
+# Running a cluster job
 
 I have split this up into two sections:
 
-1. [Setting up and submitting a job](#1-setting-up-and-submitting-a-job) (using a ready made job script)
-2. Creating a new job script
+- [Running a cluster job](#running-a-cluster-job)
+  - [1 Setting up and submitting a job](#1-setting-up-and-submitting-a-job)
+    - [1.1 Set up](#11-set-up)
+    - [1.2 Run R and bootstrap the environment](#12-run-r-and-bootstrap-the-environment)
+    - [1.3 Submit job](#13-submit-job)
+    - [1.4 A specific example job](#14-a-specific-example-job)
+  - [2 Creating/Modifying a cluster job script](#2-creatingmodifying-a-cluster-job-script)
 
-## 1. Setting up and submitting a job
+## 1 Setting up and submitting a job
 
 ### 1.1 Set up
 
@@ -67,7 +72,7 @@ sbatch tbvax/cluster_scripts/demoscript.sh # Submit the job
 
 You can then check the status of the job using `squeue --user=$USER` or the equivalent custom shortcut `usqueue`.
 
-### 1.4 Example job
+### 1.4 A specific example job
 
 Here is the summary of commands to run the example job which we will call 'lshtm-test-job'.
 
@@ -87,3 +92,5 @@ HOME=/work/ec232/ec232/YourUserName R
 
 sbatch tbvax/cluster_scripts/cirrus/IND_epicomplex.sh
 ```
+
+## 2 Creating/Modifying a cluster job script
