@@ -14,6 +14,7 @@ module load 'cmake/3.22.1'
 alias ll='ls -lah'
 alias usqueue='squeue --user=${USER}'
 alias cdwork='cd /work/ec232/ec232/${USER}'
+alias update-hpc-setup='(cd $HOME/hpc-setup && git pull)'
 
 # Create user-specific bin folder and update path
 [[ -d $HOME/.local/share/bin ]] || mkdir -p "$HOME/.local/share/bin"
