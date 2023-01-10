@@ -17,7 +17,7 @@ I have split this up into two sections:
 * Clone the `tbvax` GitHub repository _into_ that new folder. Your folder layout might look like this:
 
 ```
-/work/ec232/ec232/YourUserName
+/work/ec232/ec232/YourUserName/
 └── FolderForClusterJob/                <-- Make this for each cluster job
     └── tbvax/                          <-- clone the tbvax repository
             ├── cluster_scripts/
@@ -46,18 +46,19 @@ I have split this up into two sections:
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob/tbvax # Enter the correct folder
 git checkout Intro # Make sure you are on the Intro branch (during testing and this walkthrough)
 module load 'R/4.0.2'
+module load 'cmake/3.22.1'
 HOME=/work/ec232/ec232/YourUserName R
 ```
 
 * R should launch and `renv` should begin to bootstrap. It should offer to install packages, etc. Use `renv::restore()` to set up, say yes to installation and finish bootstrapping.
 * You should do this for every cluster job before you actually submit it to the cluster.
 
-> The very first time you do this it will take some time as `renv` must download and install all packages. Subsequent cluster jobs (as long as you are correctly located on /work) should be faster.
+> The very first time you do this it will take some time as `renv` must download and install all packages. The process should be faster for subsequent cluster jobs (as long as you are correctly located on /work).
 
 ### 1.3 Submit job
 
 * Submitting a job is simply running the `sbatch` command with the associated cluster job script name.
-* Assuming the folder structure above, and a cluster job script called `demo_script.sh`.
+* Assuming the folder structure above, and a cluster job script called `demoscript.sh`.
 
 ```bash
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob # Ensure you are in the right place
