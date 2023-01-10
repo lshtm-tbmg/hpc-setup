@@ -104,4 +104,4 @@ Open R. `renv` will bootstrap. Then run `renv::restore()` to install the R packa
 
 [^cmake]: I think `arrow` requires `cmake v3.22` to compile.
 
-[ghcli]: cli.github.com
+[ghcli]: https://cli.github.com

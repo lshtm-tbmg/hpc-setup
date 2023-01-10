@@ -62,12 +62,12 @@ HOME=/work/ec232/ec232/YourUserName R
 
 ### 1.3 Submit job
 
-* Submitting a job is simply running the `sbatch` command with the associated cluster job script name.
+* Submitting a job is simply running the `sbatch` command with the path to the job script.
 * Assuming the folder structure above, and a cluster job script called `demoscript.sh`.
 
 ```bash
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob # Ensure you are in the right place
-sbatch tbvax/cluster_scripts/demoscript.sh # Submit the job
+sbatch tbvax/cluster_scripts/cirrus/demoscript.sh # Submit the job
 ```
 
 You can then check the status of the job using `squeue --user=$USER` or the equivalent custom shortcut `usqueue`.
