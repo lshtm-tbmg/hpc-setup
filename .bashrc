@@ -49,3 +49,7 @@ fi;
 # Return home
 cd "${HOME}" || exit
 export EDITOR="$HOME/.local/bin/micro"
+
+# Uncomment these two lines if you want to see the full current working directory visible at all times on the prompt
+#PS1="[\u \$PWD]$ "
+#export PS1
