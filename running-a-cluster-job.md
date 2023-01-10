@@ -80,6 +80,7 @@ cd lshtm-test-job # Enter that folder
 git clone git@github.com:lshtm-tbmg/tbvax.git # Clone tbvax
 git checkout Intro # Checkout the "Intro" branch
 module load 'R/4.0.2'
+module load 'cmake/3.22.1'
 HOME=/work/ec232/ec232/YourUserName R
 
 ### Complete the renv steps, then exit R and return to the prompt
