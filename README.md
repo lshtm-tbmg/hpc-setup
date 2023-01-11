@@ -89,7 +89,7 @@ Verify that you have successfully authenticated using the `gh auth status` comma
 
 ## 3 Getting started with `tbvax`
 
-First, clone the `tbvax` repository and checkout the **Intro** branch. Note we're not back to using SSH (`git@github.com:`):
+First, clone the `tbvax` repository and checkout the **Intro** branch. Note we're now back to using SSH (`git@github.com:`):
 
 ```bash
 cd "$HOME"
