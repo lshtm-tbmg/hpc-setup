@@ -2,6 +2,8 @@
 
 # Running a cluster job
 
+**Please read through the whole document before attempting the example**
+
 I have split this up into two sections:
 
 - [Running a cluster job](#running-a-cluster-job)
