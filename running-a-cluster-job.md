@@ -4,6 +4,8 @@
 
 **Please read through the whole document before attempting the example**
 
+**Consider reading <https://cirrus.readthedocs.io/en/main/user-guide/batch.html#running-jobs-on-cirrus>**. It is very good.
+
 I have split this up into two sections:
 
 - [Running a cluster job](#running-a-cluster-job)
@@ -13,6 +15,8 @@ I have split this up into two sections:
     - [1.3 Submit job](#13-submit-job)
     - [1.4 A specific example job](#14-a-specific-example-job)
   - [2 Creating/Modifying a cluster job script](#2-creatingmodifying-a-cluster-job-script)
+    - [2.1 Cluster directives](#21-cluster-directives)
+    - [2.2 The Rscript call](#22-the-rscript-call)
 
 ## 1 Setting up and submitting a job
 
@@ -37,17 +41,17 @@ I have split this up into two sections:
 
 * This will ensure that each cluster job, output, and the model associated with it remain isolated from others to facilitate reproducibility and debugging.
 
-* The cluster job submission scripts are stored in: `tbvax/cluster_scripts/cirrus`
-  * **NOTE** There are two possible workflows here:
-    * Approach 1: for each cluster job run, you can write a cluster job script on your own computer and commit it to git, push to GitHub, then clone back down to Cirrus. The cluster job script is then ready to submit.
-    * Approach 2: for each cluster job run, you can make the folder for the cluster job, then write/modify the script _on_ cirrus itself.
-    * I prefer approach 1 because it keeps a record of the cluster job scripts as well, but it is at the cost of more commits to git. However, git commits (especially small ones like this) are very cheap.
+- The cluster job submission scripts are stored in: `tbvax/cluster_scripts/cirrus`
+  - **NOTE** There are two possible workflows here:
+    - Approach 1: for each cluster job run, you can write a cluster job script on your own computer and commit it to git, push to GitHub, then clone back down to Cirrus. The cluster job script is then ready to submit.
+    - Approach 2: for each cluster job run, you can make the folder for the cluster job, then write/modify the script _on_ cirrus itself.
+    - I prefer approach 1 because it keeps a record of the cluster job scripts as well, but it is at the cost of more commits to git. However, git commits (especially small ones like this) are very cheap.
 
 ### 1.2 Run R and bootstrap the environment
 
-* Before you submit the job, you have to make sure the R environment is configured correctly.
-* Enter the `tbvax` folder that you cloned inside `FolderForClusterJob`
-* Run the following in the terminal:
+- Before you submit the job, you have to make sure the R environment is configured correctly.
+- Enter the `tbvax` folder that you cloned inside `FolderForClusterJob`
+- Run the following in the terminal:
 
 ```bash
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob/tbvax # Enter the correct folder
@@ -96,3 +100,61 @@ sbatch tbvax/cluster_scripts/cirrus/IND_epicomplex.sh
 ```
 
 ## 2 Creating/Modifying a cluster job script
+
+Please read the [**Running the model**][run-model] section on the tbvax wiki first.
+
+This section deals with the **cluster submission script** (aka **cluster job script**) on Cirrus.
+
+The example above uses `YourJobFolder/tbvax/cluster_scripts/cirrus/IND_epicomplex.sh`.
+
+Here, we will describe the lines that (under typical circumstances) you should review and change for your particular job.
+
+> Unless you know what you are doing, if it isn't mentioned here, then don't change it! Some of the commands are infrastructure!
+
+Comments _other than_ `#SBATCH` _directives_ begin with the hash (`#`) and are ignored when the file is parsed.
+
+### 2.1 Cluster directives
+
+```bash
+#SBATCH --job-name=job_name #!!CHANGE!!#
+#SBATCH --partition=standard
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1 
+#SBATCH --tasks-per-node=36 
+#SBATCH --array=0-71 
+#SBATCH -t 3-0:0  #(amount of time requested: in days-hours:minutes:seconds, or just minutes)
+#SBATCH --account=ec232
+#SBATCH --qos=standard
+```
+
+This script requests a job called `job_name` (inventive, I know) for 1 node, with 36 cores for 3 days, for a job with 72 separate tasks in an array.
+
+The directives (`#SBATCH`) control various aspects of the cluster job. Consider changing:
+
+- `--job_name` : this should be the job name you decide. I suggest the same name as the folder you made, alphanumeric characters only, lower case, no spaces and no symbols.
+- `--nodes` : essentially how many compute nodes (i.e., full multicore CPUs) you require. Each multicore CPU has 36 cores.
+- `--tasks-per-node` : how many of the cores on the node will you use? Normally we use all, so 36.
+- `--array` : if you are submitting a large parallel job with say, 1000 tasks, then you need to set `--array=0-999` (indexing begins at 0).
+- `-t` : the maximum time you think the _overall_ job needs. The maximum time allowed is **4 days**.
+- `qos` : quality of service. In principle you can change the relative priority of your jobs. See <https://cirrus.readthedocs.io/en/main/user-guide/batch.html#quality-of-service-qos>
+
+> Unlike Harvard, EPCC has only one useful CPU partition ("standard"), so the `--partition` option should not be changed (unless we decide to use GPUs, in which case, `¯\_(ツ)_/¯`)
+
+### 2.2 The Rscript call
+
+This is where the magic happens.
+
+This is the actual line where you point your _cluster job script_ to some kind of _R file_ and pass it some _arguments_.
+
+* In this case, we are running `GenEpiOutput_complex.R`, which will iterate through fitted parameter sets, run the model and produce epidemiologic output (i.e., baseline and vaccine scenarios).
+* Refer to [**Run Model**][run-model] for more details, but in brief:
+  * `-c` - the ISO3 country code. "IND" for India.
+  * `-s` - the scenarios file, which lists what scenarios to run (e.g., baseline vs vaccine) and the names of their corresponding XML files.
+  * `-p` - parameters file - a CSV where each parameter set is a row.
+
+```bash
+# Run Rscript; redirect stdout and stderr to CO file
+Rscript GenEpiOutput_complex.R -c "IND" -s "epi_vx_scenarios_noEndTB.csv" -p "IND_params.csv" >& "${CON}" || log "RScript Failed"
+```
+
+[run-model]: https://github.com/lshtm-tbmg/tbvax/wiki/Running-a-single-country-model#running-the-model
