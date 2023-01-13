@@ -46,6 +46,14 @@ if ! [[ -f "$HOME/.local/bin/micro" ]]; then
 	cd "$HOME" || exit
 fi;
 
+# Download and install fzf
+if ! [[ -d $HOME/.fzf ]]; then
+	echo 'Installing FZF'
+	git clone -q --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf;
+	"$HOME"/.fzf/install --xdg --all;
+	echo 'Installed FZF'
+fi;
+
 # Return home
 cd "${HOME}" || exit
 export EDITOR="$HOME/.local/bin/micro"
@@ -53,3 +61,6 @@ export EDITOR="$HOME/.local/bin/micro"
 # Uncomment these two lines if you want to see the full current working directory visible at all times on the prompt
 #PS1="[\u \$PWD]$ "
 #export PS1
+
+# Source fzf bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
