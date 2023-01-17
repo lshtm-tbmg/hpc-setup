@@ -6,9 +6,10 @@ pathadd() {
 }
 
 # Preload some of the most commonly used modules
-module load 'R/4.0.2'
 module load 'tmux/3.3a'
 module load 'cmake/3.22.1'
+module use -p /work/ec232/ec232/shared/modulefiles
+module unload R && module load 'R/4.1.2'
 
 # Set some useful aliases
 alias ll='ls -lah'
@@ -64,3 +65,6 @@ export EDITOR="$HOME/.local/bin/micro"
 
 # Source fzf bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Export /work folder
+export WORK=/work/ec232/ec232/"${USER}"
