@@ -26,7 +26,7 @@ cd "$HOME"/hpc-setup
 git pull
 # Log out and log in again
 
-# If you have updated the hpc-setup folder before then run:
+# If you have (ever) updated the hpc-setup folder before then run:
 update-hpc-setup
 # Log out and log in again
 ```
@@ -67,8 +67,7 @@ update-hpc-setup
 - Run the following in the terminal:
 
 ```bash
-cd "$HOME"/hpc-setup
-git pull
+# Make sure you update hpc-setup (see above)
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob/tbvax # Enter the correct folder
 git checkout Intro # Make sure you are on the Intro branch (during testing and this walkthrough)
 module load 'R/4.1.2'
@@ -100,8 +99,7 @@ Here is the summary of commands to run the example job which we will call 'lshtm
 NB: this will run an actual output generation script of tbvax-India.
 
 ```bash
-cd "$HOME"/hpc-setup
-git pull
+# Make sure you update hpc-setup (see above)
 cd /work/ec232/ec232/YourUserName # Enter /work
 mkdir lshtm-test-job # Make a folder for your job
 cd lshtm-test-job # Enter that folder
@@ -149,8 +147,8 @@ This script requests a job called `job_name` (inventive, I know) for 1 node, wit
 The directives (`#SBATCH`) control various aspects of the cluster job. Consider changing:
 
 - `--job_name` : this should be the job name you decide. I suggest the same name as the folder you made, alphanumeric characters only, lower case, no spaces and no symbols.
-- `--nodes` : essentially how many compute nodes (i.e., full multicore CPUs) you require. Each node has two CPUs each with 18 cores (=36 cores per node).
-- `--tasks-per-node` : how many of the cores on the node will you use? Normally we use all, so 36.
+- `--nodes` : essentially how many compute nodes (i.e., full multicore CPUs) you require. Each node has two CPUs each with 18 cores (=36 cores per node). You probably don't need to include this.
+- `--tasks-per-node` : how many of the cores on the node will you use? Normally we use all, so 36. You probably don't need to include this.
 - `--array` : if you are submitting a large parallel job with say, 1000 tasks, then you need to set `--array=0-999` (indexing begins at 0).
 - `-t` : the maximum time you think the _overall_ job needs. The maximum time allowed is **4 days**.
 - `qos` : quality of service. In principle you can change the relative priority of your jobs. See <https://cirrus.readthedocs.io/en/main/user-guide/batch.html#quality-of-service-qos>
