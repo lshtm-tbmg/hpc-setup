@@ -18,6 +18,19 @@ I have split this up into two sections:
     - [2.1 Cluster directives](#21-cluster-directives)
     - [2.2 The Rscript call](#22-the-rscript-call)
 
+* **Before you do any of this please make sure your `hpc-setup` folder is up to date:**
+
+```bash
+# If this is the first time you are updating the hpc-setup folder, then run:
+cd "$HOME"/hpc-setup
+git pull
+# Log out and log in again
+
+# If you have updated the hpc-setup folder before then run:
+update-hpc-setup
+# Log out and log in again
+```
+
 ## 1 Setting up and submitting a job
 
 ### 1.1 Set up
