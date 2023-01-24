@@ -54,9 +54,11 @@ I have split this up into two sections:
 - Run the following in the terminal:
 
 ```bash
+cd "$HOME"/hpc-setup
+git pull
 cd /work/ec232/ec232/YourUserName/FolderForClusterJob/tbvax # Enter the correct folder
 git checkout Intro # Make sure you are on the Intro branch (during testing and this walkthrough)
-module load 'R/4.0.2'
+module load 'R/4.1.2'
 module load 'cmake/3.22.1'
 HOME=/work/ec232/ec232/YourUserName R
 ```
@@ -85,12 +87,14 @@ Here is the summary of commands to run the example job which we will call 'lshtm
 NB: this will run an actual output generation script of tbvax-India.
 
 ```bash
+cd "$HOME"/hpc-setup
+git pull
 cd /work/ec232/ec232/YourUserName # Enter /work
 mkdir lshtm-test-job # Make a folder for your job
 cd lshtm-test-job # Enter that folder
 git clone git@github.com:lshtm-tbmg/tbvax.git # Clone tbvax
 git checkout Intro # Checkout the "Intro" branch
-module load 'R/4.0.2'
+module load 'R/4.1.2'
 module load 'cmake/3.22.1'
 HOME=/work/ec232/ec232/YourUserName R
 
